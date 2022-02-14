@@ -10,6 +10,7 @@ const makeAuth = async () => {
         auth: {
           key: pubKey.split('\n')[1],
           algorithm: 'EdDSA',
+          header: 'Foo-Header',
         }
       }
     }
@@ -59,6 +60,24 @@ describe('AuthService', () => {
       const { auth } = await makeAuth();
       const data = await auth.parse('foo');
       expect(data).toBeInstanceOf(Object);
+    });
+  });
+
+  describe('.getUserTokenMiddleware()', () => {
+    it('makes and returns a user token middleware', async () => {
+      const { auth, keyPair } = await makeAuth();
+
+      const middleware = auth.getUserTokenMiddleware();
+      expect(middleware).toBeInstanceOf(Function);
+
+      const token = await new SignJWT({ id: 123 }).setProtectedHeader({ alg: 'EdDSA' }).sign(keyPair.privateKey);
+      const next = jest.fn();
+      const req = { get: jest.fn(() => token) };
+
+      await middleware(req, undefined, next);
+      expect(req.get).toHaveBeenCalledWith('Foo-Header');
+      expect(next).toHaveBeenCalled();
+      expect(req).toHaveProperty('user', { id: 123 });
     });
   });
 });

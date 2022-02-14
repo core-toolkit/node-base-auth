@@ -1,6 +1,6 @@
 module.exports = {
   collectCoverage: true,
-  collectCoverageFrom: ['src/services/*.js'],
+  collectCoverageFrom: ['src/(services|middleware)/*.js'],
   testMatch: ['**/*.test.js'],
   testPathIgnorePatterns: ['./node_modules/'],
   silent: false,

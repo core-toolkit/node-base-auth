@@ -1,18 +1,19 @@
 const jose = require('jose');
 const { createPublicKey } = require('crypto');
+const UserTokenMiddleware = require('../middleware/UserTokenMiddleware');
 
 /**
  * @param {String} key
  * @param {String} algorithm
  */
-module.exports = ({ Core: { Config: { auth: { key, algorithm } } } }) => {
+module.exports = ({ Core: { Config: { auth: { key, algorithm, header } } } }) => {
   const cert = createPublicKey({
     key: Buffer.from(key, 'base64'),
     type: 'spki',
     format: 'der',
   });
 
-  return {
+  const iface = {
     /**
      * @param {String} token
      * @returns {Object}
@@ -25,5 +26,11 @@ module.exports = ({ Core: { Config: { auth: { key, algorithm } } } }) => {
         return {};
       }
     },
+
+    getUserTokenMiddleware() {
+      return UserTokenMiddleware(header, iface.parse);
+    },
   };
+
+  return iface;
 };
