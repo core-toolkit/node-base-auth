@@ -6,9 +6,9 @@ const UserTokenMiddleware = require('../middleware/UserTokenMiddleware');
  * @param {String} key
  * @param {String} algorithm
  */
-module.exports = ({ Core: { Config: { auth: { key, algorithm, header } } } }) => {
+ module.exports = ({ Core: { Config: { auth: { pubKey, algorithm, header } } } }) => {
   const cert = createPublicKey({
-    key: Buffer.from(key, 'base64'),
+    key: Buffer.from(pubKey, 'base64'),
     type: 'spki',
     format: 'der',
   });
