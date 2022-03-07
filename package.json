@@ -1,7 +1,7 @@
 {
-  "name": "node-base-auth",
+  "name": "@core-toolkit/node-base-auth",
   "version": "0.0.1",
-  "description": "",
+  "description": "Authentication plugin for node-base",
   "main": "src/index.js",
   "scripts": {
     "test": "jest --detectOpenHandles"
@@ -17,9 +17,12 @@
   },
   "homepage": "https://github.com/core-toolkit/node-base-auth#readme",
   "devDependencies": {
-    "node-base-dev": "github:core-toolkit/node-base-dev"
+    "@core-toolkit/node-base-dev": "^0.0.1"
   },
   "dependencies": {
     "jose": "^4.5.0"
+  },
+  "peerDependencies": {
+    "@core-toolkit/node-base": "^0.0.6"
   }
 }
