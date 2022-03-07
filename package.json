@@ -1,6 +1,6 @@
 {
   "name": "@core-toolkit/node-base-auth",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Authentication plugin for node-base",
   "main": "src/index.js",
   "scripts": {
@@ -17,12 +17,12 @@
   },
   "homepage": "https://github.com/core-toolkit/node-base-auth#readme",
   "devDependencies": {
-    "@core-toolkit/node-base-dev": "^0.0.1"
+    "@core-toolkit/node-base-dev": "0.x"
   },
   "dependencies": {
     "jose": "^4.5.0"
   },
   "peerDependencies": {
-    "@core-toolkit/node-base": "^0.0.6"
+    "@core-toolkit/node-base": "0.x"
   }
 }
